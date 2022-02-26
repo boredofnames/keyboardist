@@ -1,5 +1,5 @@
-[
-  {
+{
+  "qwerty": {
     "top": {
       "left": "qwert",
       "right": "yuiop[]\\"
@@ -17,7 +17,7 @@
       "right": " "
     }
   },
-  {
+  "colemak": {
     "top": {
       "left": "qwfpg",
       "right": "jluy;[]\\"
@@ -35,7 +35,7 @@
       "right": " "
     }
   },
-  {
+  "colemakdh": {
     "top": {
       "left": "qwfpb",
       "right": "jluy;[]\\"
@@ -53,7 +53,7 @@
       "right": " "
     }
   },
-  {
+  "workman": {
     "top": {
       "left": "qdrwb",
       "right": "jfup;[]\\"
@@ -71,4 +71,4 @@
       "right": " "
     }
   }
-]
+}

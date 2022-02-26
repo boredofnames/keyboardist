@@ -1,17 +1,24 @@
 import { onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
+
+import useRedux from '../../store/useRedux';
+import reduxStore from '../../store/store';
+import actions from '../../store/actions';
+
 import { filterObject } from '../../js/utils';
 import Key from './Key';
 import LAYOUTS from './layouts.json';
 import MAPPING from './mapping.json';
 import styles from './Keyboard.module.css';
 
-function Keyboard(props) {
+function Keyboard() {
+  const [store, { toggleEmulate, setLayout }] = useRedux(reduxStore, actions);
+
   const LAYOUT = {
-    QWERTY: 0,
-    COLEMAK: 1,
-    COLEMAK_DH: 2,
-    WORKMAN: 3,
+    QWERTY: 'qwerty',
+    COLEMAK: 'colemak',
+    COLEMAK_DH: 'colemakdh',
+    WORKMAN: 'workman',
   };
 
   const shifted = {
@@ -33,16 +40,16 @@ function Keyboard(props) {
 
   const onKeyDown = (e) => {
     let key =
-        props.emulate && MAPPING[props.layout][e.key]
-          ? MAPPING[props.layout][e.key]
+        store.emulate && MAPPING[store.layout][e.key]
+          ? MAPPING[store.layout][e.key]
           : e.key,
       newKeys = { ...state.keys, [key]: true };
     setState('keys', newKeys);
   };
   const onKeyUp = (e) => {
     let key =
-        props.emulate && MAPPING[props.layout][e.key]
-          ? MAPPING[props.layout][e.key]
+        store.emulate && MAPPING[store.layout][e.key]
+          ? MAPPING[store.layout][e.key]
           : e.key,
       newKeys = { ...state.keys, [key]: false };
     setState({
@@ -73,14 +80,14 @@ function Keyboard(props) {
           <select
             value={0}
             onChange={(e) => {
-              props.setLayout(e.target.value);
+              setLayout(e.target.value);
               document.activeElement.blur();
             }}
           >
-            <option value={LAYOUT.QWERTY}>qwerty</option>
-            <option value={LAYOUT.COLEMAK}>colemak</option>
-            <option value={LAYOUT.COLEMAK_DH}>colemak-dh</option>
-            <option value={LAYOUT.WORKMAN}>workman</option>
+            <option value={LAYOUT.QWERTY}>QWERTY</option>
+            <option value={LAYOUT.COLEMAK}>Colemak</option>
+            <option value={LAYOUT.COLEMAK_DH}>Colemak-DH</option>
+            <option value={LAYOUT.WORKMAN}>Workman</option>
           </select>{' '}
         </label>
         <label class="main">
@@ -103,8 +110,8 @@ function Keyboard(props) {
           Emulate
           <input
             type="checkbox"
-            value={props.emulate}
-            onChange={(e) => props.setEmulate(e.target.checked)}
+            value={store.emulate}
+            onChange={(e) => toggleEmulate(e.target.checked)}
           />
           <span class="checkbox"></span>
         </label>
@@ -112,7 +119,7 @@ function Keyboard(props) {
 
       <div class={styles.keys}>
         <For
-          each={Object.keys(LAYOUTS[props.layout])}
+          each={Object.keys(LAYOUTS[store.layout])}
           fallback={<div>Loading..</div>}
         >
           {(row) => (
@@ -121,21 +128,21 @@ function Keyboard(props) {
               style={{
                 'margin-left':
                   !state.ortholinear && row === 'space'
-                    ? '170px'
+                    ? '186px'
                     : state.ortholinear && row === 'space'
                     ? '144px'
                     : !state.ortholinear && row === 'mid'
                     ? '10px'
                     : !state.ortholinear && row === 'bottom'
-                    ? '26px'
+                    ? '42px'
                     : '0px',
                 //'align-self': row === 'space' ? 'center' : 'auto',
               }}
             >
-              <For each={Object.keys(LAYOUTS[props.layout][row])}>
+              <For each={Object.keys(LAYOUTS[store.layout][row])}>
                 {(side) => (
                   <>
-                    <For each={LAYOUTS[props.layout][row][side].split('')}>
+                    <For each={LAYOUTS[store.layout][row][side].split('')}>
                       {(key, i) => (
                         <Key
                           key={getKey(key)}

@@ -4,4 +4,6 @@ const filterObject = (obj, callback) => {
   );
 };
 
-export { filterObject };
+const randomFrom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+export { filterObject, randomFrom };

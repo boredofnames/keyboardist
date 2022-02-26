@@ -1,9 +1,17 @@
 import { createEffect, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
+
+import useRedux from '../../store/useRedux';
+import reduxStore from '../../store/store';
+import actions from '../../store/actions';
+
+import { randomFrom } from '../../js/utils';
 import MAPPING from '../Keyboard/mapping.json';
 import styles from './Typer.module.css';
 
-function Typer(props) {
+function Typer() {
+  const [store] = useRedux(reduxStore, actions);
+
   const [state, setState] = createStore({
     type: 'letters',
     text: 'loading...',
@@ -56,8 +64,6 @@ function Typer(props) {
 
   let setRef, sentenceRef;
 
-  const randomFrom = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
   const generate = () => {
     let generated = [];
     if (state.type === 'letters') {
@@ -71,8 +77,8 @@ function Typer(props) {
     if (state.start === null) setState('start', Date.now());
     let allowed = ['Backspace'],
       key =
-        props.emulate && MAPPING[props.layout][e.key]
-          ? MAPPING[props.layout][e.key]
+        store.emulate && MAPPING[store.layout][e.key]
+          ? MAPPING[store.layout][e.key]
           : e.key;
     if (!allowed.includes(key) && !/^[a-zA-Z '".,-?!]$/.test(key)) return;
     if (key === 'Backspace') setState('typed', (t) => t.slice(0, t.length - 1));
