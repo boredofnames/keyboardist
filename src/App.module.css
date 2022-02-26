@@ -1,0 +1,16 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-dark);
+  color: var(--color-lighter);
+  height: 100vh;
+}
+
+header {
+  padding: 20px;
+  background-color: var(--color-darker);
+}
+
+.logo {
+  font-family: 'Nova Mono', monospace;
+}

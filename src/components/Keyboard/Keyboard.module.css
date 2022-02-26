@@ -1,0 +1,53 @@
+.Keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--color-light);
+}
+
+.Keyboard .keys {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.Key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 2px;
+  padding: 5px;
+  background-color: var(--color-dark);
+  /* font-weight: bold; */
+  font-size: 2rem;
+  box-shadow: inset 0px 0px 2px rgba(255, 255, 255, 20);
+  filter: drop-shadow(2px 2px 2px black);
+  font-family: 'Oxygen Mono', monospace;
+}
+
+.Key.pressed {
+  background-color: var(--color-lighter);
+}
+
+.Keyboard .row {
+  display: flex;
+}
+
+/* .Keyboard .row:nth-child(2) .Key:nth-child(4),
+.Keyboard .row:nth-child(2) .Key:nth-child(8) {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+} */
+
+.homekey {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.spacer {
+  display: inline-block;
+  width: 100px;
+}

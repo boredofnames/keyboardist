@@ -1,0 +1,74 @@
+[
+  {
+    "top": {
+      "left": "qwert",
+      "right": "yuiop[]\\"
+    },
+    "mid": {
+      "left": "asdfg",
+      "right": "hjkl;'"
+    },
+    "bottom": {
+      "left": "zxcvb",
+      "right": "nm,./"
+    },
+    "space": {
+      "left": " ",
+      "right": " "
+    }
+  },
+  {
+    "top": {
+      "left": "qwfpg",
+      "right": "jluy;[]\\"
+    },
+    "mid": {
+      "left": "arstd",
+      "right": "hneio'"
+    },
+    "bottom": {
+      "left": "zxcvb",
+      "right": "km,./"
+    },
+    "space": {
+      "left": " ",
+      "right": " "
+    }
+  },
+  {
+    "top": {
+      "left": "qwfpb",
+      "right": "jluy;[]\\"
+    },
+    "mid": {
+      "left": "arstg",
+      "right": "mneio'"
+    },
+    "bottom": {
+      "left": "zxcdv",
+      "right": "kh,./"
+    },
+    "space": {
+      "left": " ",
+      "right": " "
+    }
+  },
+  {
+    "top": {
+      "left": "qdrwb",
+      "right": "jfup;[]\\"
+    },
+    "mid": {
+      "left": "ashtg",
+      "right": "yneoi'"
+    },
+    "bottom": {
+      "left": "zxmcv",
+      "right": "kl,./"
+    },
+    "space": {
+      "left": " ",
+      "right": " "
+    }
+  }
+]

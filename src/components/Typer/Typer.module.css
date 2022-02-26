@@ -1,0 +1,13 @@
+.Typer {
+  flex: 1;
+  padding: 20px;
+}
+
+.text {
+  margin-top: 20px;
+  font-size: 2rem;
+  word-wrap: break-word;
+  letter-spacing: 1px;
+  font-family: 'Oxygen Mono', monospace;
+  text-decoration: underline;
+}
