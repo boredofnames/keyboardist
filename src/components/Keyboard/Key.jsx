@@ -1,7 +1,6 @@
 import styles from './Keyboard.module.css';
 
 function Key(props) {
-  console.log(props.key, props.homekey);
   return (
     <span
       class={styles.Key}
