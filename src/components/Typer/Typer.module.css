@@ -3,6 +3,18 @@
   padding: 20px;
 }
 
+.Typer select {
+  user-select: none;
+}
+
+.Typer select:nth-child(2) {
+  margin-right: 10px;
+}
+
+.Typer select:nth-child(3) {
+  margin-right: 20px;
+}
+
 .text {
   margin-top: 20px;
   font-size: 2rem;
@@ -10,4 +22,18 @@
   letter-spacing: 1px;
   font-family: 'Oxygen Mono', monospace;
   text-decoration: underline;
+  user-select: none;
+  outline: none;
+}
+
+.logo {
+  font-family: 'Nova Mono', monospace;
+  user-select: none;
+  margin-right: 20px;
+}
+
+.options {
+  width: fit-content;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-darker);
 }

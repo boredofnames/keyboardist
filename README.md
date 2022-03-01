@@ -1,3 +1,7 @@
+## About
+
+Keyboardist is a typing trainer coded in SolidJS. It's made to train your typing speed and memory of the keys in different layouts.
+
 ## Usage
 
 Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.

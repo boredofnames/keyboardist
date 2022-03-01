@@ -5,9 +5,6 @@ import styles from './App.module.css';
 function App() {
   return (
     <div class={styles.App}>
-      <header class={styles.header}>
-        <span class={styles.logo}>Keyboardist</span>
-      </header>
       <Typer />
       <Keyboard />
     </div>

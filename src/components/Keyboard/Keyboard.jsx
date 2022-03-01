@@ -11,6 +11,9 @@ import LAYOUTS from './layouts.json';
 import MAPPING from './mapping.json';
 import styles from './Keyboard.module.css';
 
+import Hand from './hand';
+import storage from '../../js/storage';
+
 function Keyboard() {
   const [store, { toggleEmulate, setLayout }] = useRedux(reduxStore, actions);
 
@@ -78,16 +81,16 @@ function Keyboard() {
         <label>
           Layout:{' '}
           <select
-            value={0}
+            value={store.layout}
             onChange={(e) => {
               setLayout(e.target.value);
+              storage.set('layout', e.target.value);
               document.activeElement.blur();
             }}
           >
-            <option value={LAYOUT.QWERTY}>QWERTY</option>
-            <option value={LAYOUT.COLEMAK}>Colemak</option>
-            <option value={LAYOUT.COLEMAK_DH}>Colemak-DH</option>
-            <option value={LAYOUT.WORKMAN}>Workman</option>
+            <For each={Object.values(LAYOUT)}>
+              {(layout) => <option value={layout}>{layout}</option>}
+            </For>
           </select>{' '}
         </label>
         <label class="main">
@@ -110,60 +113,67 @@ function Keyboard() {
           Emulate
           <input
             type="checkbox"
-            value={store.emulate}
-            onChange={(e) => toggleEmulate(e.target.checked)}
+            checked={store.emulate}
+            onChange={(e) => {
+              toggleEmulate(e.target.checked);
+              storage.set('emulate', e.target.checked);
+            }}
           />
           <span class="checkbox"></span>
         </label>
       </div>
-
-      <div class={styles.keys}>
-        <For
-          each={Object.keys(LAYOUTS[store.layout])}
-          fallback={<div>Loading..</div>}
-        >
-          {(row) => (
-            <div
-              class={styles.row}
-              style={{
-                'margin-left':
-                  !state.ortholinear && row === 'space'
-                    ? '186px'
-                    : state.ortholinear && row === 'space'
-                    ? '144px'
-                    : !state.ortholinear && row === 'mid'
-                    ? '10px'
-                    : !state.ortholinear && row === 'bottom'
-                    ? '42px'
-                    : '0px',
-                //'align-self': row === 'space' ? 'center' : 'auto',
-              }}
-            >
-              <For each={Object.keys(LAYOUTS[store.layout][row])}>
-                {(side) => (
-                  <>
-                    <For each={LAYOUTS[store.layout][row][side].split('')}>
-                      {(key, i) => (
-                        <Key
-                          key={getKey(key)}
-                          pressed={state.keys[getKey(key)] === true}
-                          homekey={
-                            (row === 'mid' && side === 'left' && i() === 3) ||
-                            (row === 'mid' && side === 'right' && i() === 1)
-                          }
-                          long={row === 'space'}
-                        />
-                      )}
-                    </For>
-                    <Show when={side === 'left' && state.split}>
-                      <div class={styles.spacer} />
-                    </Show>
-                  </>
-                )}
-              </For>
-            </div>
-          )}
-        </For>
+      <div class={styles.container}>
+        <Hand side="left" letter={store.letter} />
+        <div class={styles.keys}>
+          <For
+            each={Object.keys(LAYOUTS[store.layout])}
+            fallback={<div>Loading..</div>}
+          >
+            {(row) => (
+              <div
+                class={styles.row}
+                style={{
+                  'margin-left':
+                    !state.ortholinear && row === 'space'
+                      ? '186px'
+                      : state.ortholinear && row === 'space'
+                      ? '144px'
+                      : !state.ortholinear && row === 'mid'
+                      ? '10px'
+                      : !state.ortholinear && row === 'bottom'
+                      ? '42px'
+                      : '0px',
+                  //'align-self': row === 'space' ? 'center' : 'auto',
+                }}
+              >
+                <For each={Object.keys(LAYOUTS[store.layout][row])}>
+                  {(side) => (
+                    <>
+                      <For each={LAYOUTS[store.layout][row][side].split('')}>
+                        {(key, i) => (
+                          <Key
+                            key={getKey(key)}
+                            pressed={state.keys[getKey(key)] === true}
+                            homekey={
+                              (row === 'mid' && side === 'left' && i() === 3) ||
+                              (row === 'mid' && side === 'right' && i() === 1)
+                            }
+                            long={row === 'space'}
+                            active={key === store.letter}
+                          />
+                        )}
+                      </For>
+                      <Show when={side === 'left' && state.split}>
+                        <div class={styles.spacer} />
+                      </Show>
+                    </>
+                  )}
+                </For>
+              </div>
+            )}
+          </For>
+        </div>
+        <Hand side="right" letter={store.letter} />
       </div>
     </div>
   );

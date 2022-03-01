@@ -10,7 +10,3 @@ header {
   padding: 20px;
   background-color: var(--color-darker);
 }
-
-.logo {
-  font-family: 'Nova Mono', monospace;
-}
