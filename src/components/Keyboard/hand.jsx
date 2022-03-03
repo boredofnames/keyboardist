@@ -78,7 +78,7 @@ function Hand(props) {
 
   createEffect(() => setKeys(genKeys(store.layout)));
 
-  const isActive = (finger) => finger.ids.includes(keys()[props.letter]);
+  const isActive = (finger) => finger.ids.includes(keys()[store.letter]);
 
   return (
     <div class={styles.hand}>
@@ -99,7 +99,7 @@ function Hand(props) {
               left: `${finger.left}px`,
             }}
           >
-            <Show when={isActive(finger)}>{props.letter}</Show>
+            <Show when={isActive(finger)}>{store.letter}</Show>
           </div>
         )}
       </For>

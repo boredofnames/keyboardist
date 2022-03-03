@@ -1,6 +1,5 @@
 import { onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
-
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
 import actions from '../../store/actions';
@@ -11,18 +10,11 @@ import LAYOUTS from './layouts.json';
 import MAPPING from './mapping.json';
 import styles from './Keyboard.module.css';
 
-import Hand from './hand';
-import storage from '../../js/storage';
+import Hand from './Hand';
+import Options from './Options';
 
 function Keyboard() {
-  const [store, { toggleEmulate, setLayout }] = useRedux(reduxStore, actions);
-
-  const LAYOUT = {
-    QWERTY: 'qwerty',
-    COLEMAK: 'colemak',
-    COLEMAK_DH: 'colemakdh',
-    WORKMAN: 'workman',
-  };
+  const [store] = useRedux(reduxStore, actions);
 
   const shifted = {
     '[': '{',
@@ -77,53 +69,9 @@ function Keyboard() {
 
   return (
     <div class={styles.Keyboard}>
-      <div class={styles.options}>
-        <label>
-          Layout:{' '}
-          <select
-            value={store.layout}
-            onChange={(e) => {
-              setLayout(e.target.value);
-              storage.set('layout', e.target.value);
-              document.activeElement.blur();
-            }}
-          >
-            <For each={Object.values(LAYOUT)}>
-              {(layout) => <option value={layout}>{layout}</option>}
-            </For>
-          </select>{' '}
-        </label>
-        <label class="main">
-          Split
-          <input
-            type="checkbox"
-            onChange={(e) => setState('split', e.target.checked)}
-          />
-          <span class="checkbox"></span>
-        </label>{' '}
-        <label class="main">
-          Ortholinear
-          <input
-            type="checkbox"
-            onChange={(e) => setState('ortholinear', e.target.checked)}
-          />
-          <span class="checkbox"></span>
-        </label>
-        <label class="main">
-          Emulate
-          <input
-            type="checkbox"
-            checked={store.emulate}
-            onChange={(e) => {
-              toggleEmulate(e.target.checked);
-              storage.set('emulate', e.target.checked);
-            }}
-          />
-          <span class="checkbox"></span>
-        </label>
-      </div>
+      <Options setState={setState} />
       <div class={styles.container}>
-        <Hand side="left" letter={store.letter} />
+        <Hand side="left" />
         <div class={styles.keys}>
           <For
             each={Object.keys(LAYOUTS[store.layout])}
@@ -173,7 +121,7 @@ function Keyboard() {
             )}
           </For>
         </div>
-        <Hand side="right" letter={store.letter} />
+        <Hand side="right" />
       </div>
     </div>
   );
