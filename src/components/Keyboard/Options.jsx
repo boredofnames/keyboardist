@@ -11,6 +11,7 @@ function Options(props) {
     COLEMAK: 'colemak',
     COLEMAK_DH: 'colemakdh',
     WORKMAN: 'workman',
+    DVORAK: 'dvorak',
   };
   const [store, { toggleEmulate, setLayout }] = useRedux(reduxStore, actions);
   return (

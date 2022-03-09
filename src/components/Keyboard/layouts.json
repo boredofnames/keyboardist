@@ -70,5 +70,23 @@
       "left": " ",
       "right": " "
     }
+  },
+  "dvorak": {
+    "top": {
+      "left": "',.py",
+      "right": "fgcrl/="
+    },
+    "mid": {
+      "left": "aoeui",
+      "right": "dhtns-"
+    },
+    "bottom": {
+      "left": ";qjkx",
+      "right": "bmwvz"
+    },
+    "space": {
+      "left": " ",
+      "right": " "
+    }
   }
 }

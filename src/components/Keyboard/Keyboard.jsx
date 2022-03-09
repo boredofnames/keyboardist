@@ -25,6 +25,8 @@ function Keyboard() {
     ',': '<',
     '.': '>',
     '/': '?',
+    '=': '+',
+    '-': '_',
   };
 
   const [state, setState] = createStore({
