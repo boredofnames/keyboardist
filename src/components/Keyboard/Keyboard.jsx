@@ -92,13 +92,17 @@ function Keyboard() {
                 style={{
                   'margin-left':
                     !state.ortholinear && row === 'space'
-                      ? '186px'
+                      ? '116px'
                       : state.ortholinear && row === 'space'
-                      ? '144px'
+                      ? '74px'
                       : !state.ortholinear && row === 'mid'
                       ? '10px'
                       : !state.ortholinear && row === 'bottom'
                       ? '42px'
+                      : !state.ortholinear && row === 'number'
+                      ? '-82px'
+                      : state.ortholinear && row === 'number'
+                      ? '-54px'
                       : '0px',
                   //'align-self': row === 'space' ? 'center' : 'auto',
                 }}

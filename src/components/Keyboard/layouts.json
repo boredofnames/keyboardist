@@ -1,5 +1,9 @@
 {
   "qwerty": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890-=" },
+      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    },
     "top": {
       "main": { "left": "qwert", "right": "yuiop[]\\" },
       "caps": { "left": "QWERT", "right": "YUIOP{}|" }
@@ -9,7 +13,7 @@
       "caps": { "left": "ASDFG", "right": "HJKL:\"" }
     },
     "bottom": {
-      "main": { "left": "zxcvb", "right": "nm,./" },
+      "main": { "left": "zxcvb", "right": "nm,./¡" },
       "caps": { "left": "ZXCVB", "right": "NM<>?" }
     },
     "space": {
@@ -18,6 +22,10 @@
     }
   },
   "qwertyla": {
+    "number": {
+      "main": { "left": "º12345", "right": "67890'¿" },
+      "caps": { "left": "|!\"#$%", "right": "&/()=?¡" }
+    },
     "top": {
       "main": { "left": "qwert", "right": "yuiop`+" },
       "caps": { "left": "QWERT", "right": "YUIOP¨*" }
@@ -36,6 +44,10 @@
     }
   },
   "colemak": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890-=" },
+      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    },
     "top": {
       "main": { "left": "qwfpg", "right": "jluy;[]\\" },
       "caps": { "left": "QWFPG", "right": "JLUY:{}|" }
@@ -54,6 +66,10 @@
     }
   },
   "colemakdh": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890-=" },
+      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    },
     "top": {
       "main": { "left": "qwfpb", "right": "jluy;[]\\" },
       "caps": { "left": "QWFPB", "right": "JLUY:{}|" }
@@ -72,6 +88,10 @@
     }
   },
   "workman": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890-=" },
+      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    },
     "top": {
       "main": { "left": "qdrwb", "right": "jfup;[]\\" },
       "caps": { "left": "QDRWB", "right": "JFUP:{}|" }
@@ -90,6 +110,10 @@
     }
   },
   "dvorak": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890[]" },
+      "caps": { "left": "~!@#$%", "right": "^&*(){}" }
+    },
     "top": {
       "main": { "left": "',.py", "right": "fgcrl/=" },
       "caps": { "left": "\"<>PY", "right": "FGCRL?+" }
