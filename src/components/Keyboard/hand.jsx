@@ -68,10 +68,12 @@ function Hand(props) {
   const genKeys = (layout) => {
     let k = {};
     Object.keys(layouts[layout]).map((row) =>
-      layouts[layout][row][props.side].split('').map((letter, i) => {
-        if (letter === ' ') return;
-        k[letter] = i;
-      })
+      Object.keys(layouts[layout][row]).map((type) =>
+        layouts[layout][row][type][props.side].split('').map((letter, i) => {
+          if (letter === ' ') return;
+          k[letter] = i;
+        })
+      )
     );
     return k;
   };
@@ -79,6 +81,8 @@ function Hand(props) {
   createEffect(() => setKeys(genKeys(store.layout)));
 
   const isActive = (finger) => finger.ids.includes(keys()[store.letter]);
+
+  // const isUpperCase = (key) =>
 
   return (
     <div class={styles.hand}>

@@ -8,12 +8,16 @@ import Checkmark from '../common/Checkmark/Checkmark';
 function Options(props) {
   const LAYOUT = {
     QWERTY: 'qwerty',
+    QUERTYLA: 'qwertyla',
     COLEMAK: 'colemak',
     COLEMAK_DH: 'colemakdh',
     WORKMAN: 'workman',
     DVORAK: 'dvorak',
   };
-  const [store, { toggleEmulate, setLayout }] = useRedux(reduxStore, actions);
+  const [store, { toggleEmulate, setLayout, setEmulateFrom }] = useRedux(
+    reduxStore,
+    actions
+  );
   return (
     <div class={styles.options}>
       <label>
@@ -52,6 +56,21 @@ function Options(props) {
       >
         Emulate
       </Checkmark>
+      <Show when={store.emulate === true}>
+        From:{' '}
+        <select
+          value={store.emulateFrom}
+          onChange={(e) => {
+            setEmulateFrom(e.target.value);
+            storage.set('emulatefrom', e.target.value);
+            document.activeElement.blur();
+          }}
+        >
+          <For each={Object.values(LAYOUT)}>
+            {(layout) => <option value={layout}>{layout}</option>}
+          </For>
+        </select>
+      </Show>
     </div>
   );
 }

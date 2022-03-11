@@ -1,92 +1,110 @@
 {
   "qwerty": {
     "top": {
-      "left": "qwert",
-      "right": "yuiop[]\\"
+      "main": { "left": "qwert", "right": "yuiop[]\\" },
+      "caps": { "left": "QWERT", "right": "YUIOP{}|" }
     },
     "mid": {
-      "left": "asdfg",
-      "right": "hjkl;'"
+      "main": { "left": "asdfg", "right": "hjkl;'" },
+      "caps": { "left": "ASDFG", "right": "HJKL:\"" }
     },
     "bottom": {
-      "left": "zxcvb",
-      "right": "nm,./"
+      "main": { "left": "zxcvb", "right": "nm,./" },
+      "caps": { "left": "ZXCVB", "right": "NM<>?" }
     },
     "space": {
-      "left": " ",
-      "right": " "
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
+    }
+  },
+  "qwertyla": {
+    "top": {
+      "main": { "left": "qwert", "right": "yuiop`+" },
+      "caps": { "left": "QWERT", "right": "YUIOP¨*" }
+    },
+    "mid": {
+      "main": { "left": "asdfg", "right": "hjklñ{}" },
+      "caps": { "left": "ASDFG", "right": "HJKLÑ[]" }
+    },
+    "bottom": {
+      "main": { "left": "zxcvb", "right": "nm,.-" },
+      "caps": { "left": "ZXCVB", "right": "NM;:_" }
+    },
+    "space": {
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
     }
   },
   "colemak": {
     "top": {
-      "left": "qwfpg",
-      "right": "jluy;[]\\"
+      "main": { "left": "qwfpg", "right": "jluy;[]\\" },
+      "caps": { "left": "QWFPG", "right": "JLUY:{}|" }
     },
     "mid": {
-      "left": "arstd",
-      "right": "hneio'"
+      "main": { "left": "arstd", "right": "hneio'" },
+      "caps": { "left": "ARSTD", "right": "HNEIO\"" }
     },
     "bottom": {
-      "left": "zxcvb",
-      "right": "km,./"
+      "main": { "left": "zxcvb", "right": "km,./" },
+      "caps": { "left": "ZXCVB", "right": "KM<>?" }
     },
     "space": {
-      "left": " ",
-      "right": " "
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
     }
   },
   "colemakdh": {
     "top": {
-      "left": "qwfpb",
-      "right": "jluy;[]\\"
+      "main": { "left": "qwfpb", "right": "jluy;[]\\" },
+      "caps": { "left": "QWFPB", "right": "JLUY:{}|" }
     },
     "mid": {
-      "left": "arstg",
-      "right": "mneio'"
+      "main": { "left": "arstg", "right": "mneio'" },
+      "caps": { "left": "ARSTG", "right": "MNEIO\"" }
     },
     "bottom": {
-      "left": "zxcdv",
-      "right": "kh,./"
+      "main": { "left": "zxcdv", "right": "kh,./" },
+      "caps": { "left": "ZXCDV", "right": "KH<>?" }
     },
     "space": {
-      "left": " ",
-      "right": " "
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
     }
   },
   "workman": {
     "top": {
-      "left": "qdrwb",
-      "right": "jfup;[]\\"
+      "main": { "left": "qdrwb", "right": "jfup;[]\\" },
+      "caps": { "left": "QDRWB", "right": "JFUP:{}|" }
     },
     "mid": {
-      "left": "ashtg",
-      "right": "yneoi'"
+      "main": { "left": "ashtg", "right": "yneoi'" },
+      "caps": { "left": "ASHTG", "right": "YNEOI\"" }
     },
     "bottom": {
-      "left": "zxmcv",
-      "right": "kl,./"
+      "main": { "left": "zxmcv", "right": "kl,./" },
+      "caps": { "left": "ZXMCV", "right": "KL<>?" }
     },
     "space": {
-      "left": " ",
-      "right": " "
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
     }
   },
   "dvorak": {
     "top": {
-      "left": "',.py",
-      "right": "fgcrl/="
+      "main": { "left": "',.py", "right": "fgcrl/=" },
+      "caps": { "left": "\"<>PY", "right": "FGCRL?+" }
     },
     "mid": {
-      "left": "aoeui",
-      "right": "dhtns-"
+      "main": { "left": "aoeui", "right": "dhtns-" },
+      "caps": { "left": "AOEUI", "right": "DHTNS_" }
     },
     "bottom": {
-      "left": ";qjkx",
-      "right": "bmwvz"
+      "main": { "left": ";qjkx", "right": "bmwvz" },
+      "caps": { "left": ":QJKX", "right": "BMWVZ" }
     },
     "space": {
-      "left": " ",
-      "right": " "
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
     }
   }
 }

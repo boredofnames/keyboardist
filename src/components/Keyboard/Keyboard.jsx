@@ -1,4 +1,4 @@
-import { onMount } from 'solid-js';
+import { createEffect, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
@@ -7,26 +7,39 @@ import actions from '../../store/actions';
 import { filterObject } from '../../js/utils';
 import Key from './Key';
 import LAYOUTS from './layouts.json';
-import MAPPING from './mapping.json';
+
 import styles from './Keyboard.module.css';
 
 import Hand from './Hand';
 import Options from './Options';
 
 function Keyboard() {
-  const [store] = useRedux(reduxStore, actions);
+  const [store, { setMapping }] = useRedux(reduxStore, actions);
 
-  const shifted = {
-    '[': '{',
-    ']': '}',
-    '\\': '|',
-    ';': ':',
-    "'": '"',
-    ',': '<',
-    '.': '>',
-    '/': '?',
-    '=': '+',
-    '-': '_',
+  const buildMapping = (emulateFrom) => {
+    let fromLayout = LAYOUTS[emulateFrom],
+      toLayout = LAYOUTS[store.layout],
+      mapping = {};
+
+    for (let row in fromLayout) {
+      if (row === 'space') continue;
+      for (let type in fromLayout[row]) {
+        for (let side in fromLayout[row][type]) {
+          for (
+            let i = 0, len = fromLayout[row][type][side].length;
+            i < len;
+            i++
+          ) {
+            let from = fromLayout[row][type][side][i],
+              to = toLayout[row][type][side][i];
+            if (!from || !to) continue;
+
+            mapping[from] = to;
+          }
+        }
+      }
+    }
+    return mapping;
   };
 
   const [state, setState] = createStore({
@@ -37,17 +50,13 @@ function Keyboard() {
 
   const onKeyDown = (e) => {
     let key =
-        store.emulate && MAPPING[store.layout][e.key]
-          ? MAPPING[store.layout][e.key]
-          : e.key,
+        store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key,
       newKeys = { ...state.keys, [key]: true };
     setState('keys', newKeys);
   };
   const onKeyUp = (e) => {
     let key =
-        store.emulate && MAPPING[store.layout][e.key]
-          ? MAPPING[store.layout][e.key]
-          : e.key,
+        store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key,
       newKeys = { ...state.keys, [key]: false };
     setState({
       keys:
@@ -57,16 +66,14 @@ function Keyboard() {
     });
   };
 
-  const getKey = (key) => {
-    if (!state.keys['Shift']) return key;
-    let upper = key.toUpperCase();
-    if (upper !== key) return upper;
-    else return shifted[key];
-  };
-
   onMount(() => {
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('keyup', onKeyUp);
+  });
+
+  createEffect(() => {
+    setMapping(buildMapping(store.emulateFrom));
+    console.log('built mapping');
   });
 
   return (
@@ -96,14 +103,24 @@ function Keyboard() {
                   //'align-self': row === 'space' ? 'center' : 'auto',
                 }}
               >
-                <For each={Object.keys(LAYOUTS[store.layout][row])}>
+                <For
+                  each={Object.keys(
+                    LAYOUTS[store.layout][row][
+                      state.keys['Shift'] ? 'caps' : 'main'
+                    ]
+                  )}
+                >
                   {(side) => (
                     <>
-                      <For each={LAYOUTS[store.layout][row][side].split('')}>
+                      <For
+                        each={LAYOUTS[store.layout][row][
+                          state.keys['Shift'] ? 'caps' : 'main'
+                        ][side].split('')}
+                      >
                         {(key, i) => (
                           <Key
-                            key={getKey(key)}
-                            pressed={state.keys[getKey(key)] === true}
+                            key={key}
+                            pressed={state.keys[key] === true}
                             homekey={
                               (row === 'mid' && side === 'left' && i() === 3) ||
                               (row === 'mid' && side === 'right' && i() === 1)

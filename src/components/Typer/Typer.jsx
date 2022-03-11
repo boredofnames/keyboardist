@@ -7,7 +7,7 @@ import actions from '../../store/actions';
 
 import randomWords from 'random-words';
 import { randomFrom } from '../../js/utils';
-import MAPPING from '../Keyboard/mapping.json';
+
 import styles from './Typer.module.css';
 
 function Typer() {
@@ -114,9 +114,7 @@ function Typer() {
     if (state.start === null) setState('start', Date.now());
     let allowed = ['Backspace'],
       key =
-        store.emulate && MAPPING[store.layout][e.key]
-          ? MAPPING[store.layout][e.key]
-          : e.key;
+        store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key;
     if (!allowed.includes(key) && !/^[a-zA-Z '".,-?!()]$/.test(key)) return;
     e.preventDefault();
     if (key === 'Backspace') setState('typed', (t) => t.slice(0, t.length - 1));
