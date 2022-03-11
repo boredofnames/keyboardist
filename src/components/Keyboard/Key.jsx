@@ -11,7 +11,7 @@ function Key(props) {
         [styles.long]: props.long,
       }}
     >
-      {props.shift === true ? props.key.toUpperCase() : props.key}
+      {props.key}
       {props.pressed}
     </span>
   );

@@ -39,8 +39,8 @@
   color: var(--color-dark);
 }
 .Key.active {
-  filter: drop-shadow(0 0 4px white);
-  color: white;
+  filter: drop-shadow(0 0 4px var(--color-active));
+  color: var(--color-active);
 }
 .Key.long {
   width: 192px;
@@ -90,7 +90,7 @@
 }
 
 .indicator.active {
-  background-color: white;
+  background-color: var(--color-active);
 }
 
 .hand {

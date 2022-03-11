@@ -26,7 +26,6 @@
   word-wrap: break-word;
   letter-spacing: 1px;
   font-family: 'Oxygen Mono', monospace;
-  text-decoration: underline;
   user-select: none;
   outline: none;
 }
@@ -41,4 +40,22 @@
   width: fit-content;
   padding-bottom: 20px;
   border-bottom: 2px solid var(--color-darker);
+}
+
+.letter {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.letter.untyped {
+  color: var(--color-light);
+}
+.letter.active {
+  color: var(--color-active);
+}
+.letter.correct {
+  color: var(--color-darker);
+}
+.letter.incorrect {
+  color: red;
 }

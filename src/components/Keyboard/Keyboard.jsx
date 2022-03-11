@@ -49,6 +49,7 @@ function Keyboard() {
   });
 
   const onKeyDown = (e) => {
+    console.log(e.key);
     let key =
         store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key,
       newKeys = { ...state.keys, [key]: true };
@@ -104,7 +105,6 @@ function Keyboard() {
                       : state.ortholinear && row === 'number'
                       ? '-54px'
                       : '0px',
-                  //'align-self': row === 'space' ? 'center' : 'auto',
                 }}
               >
                 <For

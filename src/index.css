@@ -3,6 +3,7 @@
   --color-dark: #13344c;
   --color-light: #367a91;
   --color-lighter: #88bfcb;
+  --color-active: #fff;
 }
 
 body * {

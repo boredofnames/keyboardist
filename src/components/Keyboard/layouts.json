@@ -23,11 +23,11 @@
   },
   "qwertyla": {
     "number": {
-      "main": { "left": "º12345", "right": "67890'¿" },
-      "caps": { "left": "|!\"#$%", "right": "&/()=?¡" }
+      "main": { "left": "|12345", "right": "67890'¿" },
+      "caps": { "left": "º!\"#$%", "right": "&/()=?¡" }
     },
     "top": {
-      "main": { "left": "qwert", "right": "yuiop`+" },
+      "main": { "left": "qwert", "right": "yuiop´+" },
       "caps": { "left": "QWERT", "right": "YUIOP¨*" }
     },
     "mid": {

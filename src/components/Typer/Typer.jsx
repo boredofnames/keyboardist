@@ -23,7 +23,7 @@ function Typer() {
     start: null,
   });
 
-  const sets = {
+  const letterSets = {
     first: 'eari',
     second: 'otns',
     third: 'lcud',
@@ -31,6 +31,17 @@ function Typer() {
     fifth: 'bfyw',
     sixth: 'kvx',
     seventh: 'zjq',
+  };
+
+  const symbolSets = {
+    first: ',.?!',
+    second: '"\'/\\',
+    third: ';:@$',
+    forth: '<>#=',
+    fifth: '[]%^',
+    sixth: '`~{}',
+    seventh: '&*()',
+    eighth: '_+|-',
   };
 
   const sentences = {
@@ -84,12 +95,20 @@ function Typer() {
     ],
   };
 
-  let setRef, wordMaxRef, sentenceRef;
+  let letterSetRef, symbolSetRef, wordMaxRef, sentenceRef;
 
   const generate = () => {
     let generated = [];
     if (state.type === 'letters') {
-      let set = sets[setRef.value].split('');
+      let set = letterSets[letterSetRef.value].split('');
+      while (generated.length < 99)
+        generated.push(
+          generated.length != 0 && (generated.length + 1) % 5 === 0
+            ? ' '
+            : randomFrom(set)
+        );
+    } else if (state.type === 'symbols') {
+      let set = symbolSets[symbolSetRef.value].split('');
       while (generated.length < 99)
         generated.push(
           generated.length != 0 && (generated.length + 1) % 5 === 0
@@ -115,7 +134,11 @@ function Typer() {
     let allowed = ['Backspace'],
       key =
         store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key;
-    if (!allowed.includes(key) && !/^[a-zA-Z '".,-?!()]$/.test(key)) return;
+    if (
+      !allowed.includes(key) &&
+      !/^[a-zA-Z0-9 `~!@#$%^&*()-_=+;:'"[\]{}\|,<.>\/?]$/.test(key)
+    )
+      return;
     e.preventDefault();
     if (key === 'Backspace') setState('typed', (t) => t.slice(0, t.length - 1));
     else setState('typed', (t) => [...t, key]);
@@ -198,11 +221,12 @@ function Typer() {
         >
           <option value="letters">Letters</option>
           <option value="words">Words</option>
+          <option value="symbols">Symbols</option>
           <option value="sentences">Sentences</option>
         </select>
         <Show when={state.type === 'letters'}>
           <select
-            ref={setRef}
+            ref={letterSetRef}
             onChange={() => {
               setState({ text: generate(), typed: [], start: null });
               document.activeElement.blur();
@@ -215,6 +239,24 @@ function Typer() {
             <option value="fifth">Fifth Set</option>
             <option value="sixth">Sixth Set</option>
             <option value="seventh">Seventh Set</option>
+          </select>
+        </Show>
+        <Show when={state.type === 'symbols'}>
+          <select
+            ref={symbolSetRef}
+            onChange={() => {
+              setState({ text: generate(), typed: [], start: null });
+              document.activeElement.blur();
+            }}
+          >
+            <option value="first">First Set</option>
+            <option value="second">Second Set</option>
+            <option value="third">Third Set</option>
+            <option value="forth">Forth Set</option>
+            <option value="fifth">Fifth Set</option>
+            <option value="sixth">Sixth Set</option>
+            <option value="seventh">Seventh Set</option>
+            <option value="eighth">Eighth Set</option>
           </select>
         </Show>
         <Show when={state.type === 'words'}>
@@ -246,15 +288,15 @@ function Typer() {
           {(letter, i) => (
             <span
               class={styles.letter}
-              style={{
-                color: !state.typed[i()]
-                  ? 'var(--color-lighter)'
-                  : state.typed[i()] === letter
-                  ? 'var(--color-light)'
-                  : 'red',
+              classList={{
+                [styles.untyped]: !state.typed[i()],
+                [styles.active]: i() === state.typed.length,
+                [styles.correct]: state.typed[i()] === letter,
+                [styles.incorrect]:
+                  state.typed[i()] && state.typed[i()] !== letter,
               }}
             >
-              {letter === ' ' ? '_' : letter}
+              {letter}
             </span>
           )}
         </For>
