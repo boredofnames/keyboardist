@@ -13,7 +13,7 @@
       "caps": { "left": "ASDFG", "right": "HJKL:\"" }
     },
     "bottom": {
-      "main": { "left": "zxcvb", "right": "nm,./¡" },
+      "main": { "left": "zxcvb", "right": "nm,./" },
       "caps": { "left": "ZXCVB", "right": "NM<>?" }
     },
     "space": {
