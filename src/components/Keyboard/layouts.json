@@ -24,7 +24,7 @@
   "qwertyla": {
     "number": {
       "main": { "left": "|12345", "right": "67890'¿" },
-      "caps": { "left": "º!\"#$%", "right": "&/()=?¡" }
+      "caps": { "left": "°!\"#$%", "right": "&/()=?¡" }
     },
     "top": {
       "main": { "left": "qwert", "right": "yuiop´+" },
@@ -115,8 +115,8 @@
       "caps": { "left": "~!@#$%", "right": "^&*(){}" }
     },
     "top": {
-      "main": { "left": "',.py", "right": "fgcrl/=" },
-      "caps": { "left": "\"<>PY", "right": "FGCRL?+" }
+      "main": { "left": "',.py", "right": "fgcrl/=\\" },
+      "caps": { "left": "\"<>PY", "right": "FGCRL?+|" }
     },
     "mid": {
       "main": { "left": "aoeui", "right": "dhtns-" },
@@ -125,6 +125,28 @@
     "bottom": {
       "main": { "left": ";qjkx", "right": "bmwvz" },
       "caps": { "left": ":QJKX", "right": "BMWVZ" }
+    },
+    "space": {
+      "main": { "left": " ", "right": " " },
+      "caps": { "left": " ", "right": " " }
+    }
+  },
+  "halmak": {
+    "number": {
+      "main": { "left": "`12345", "right": "67890-=" },
+      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    },
+    "top": {
+      "main": { "left": "wlrbz", "right": ";qudj[]\\" },
+      "caps": { "left": "WLRBZ", "right": ":QUDJ{}|" }
+    },
+    "mid": {
+      "main": { "left": "shnt,", "right": ".aeoi'" },
+      "caps": { "left": "SHNT<", "right": ">AEOI\"" }
+    },
+    "bottom": {
+      "main": { "left": "fmvc/", "right": "gpxky" },
+      "caps": { "left": "FMVC?", "right": "GPXKY" }
     },
     "space": {
       "main": { "left": " ", "right": " " },

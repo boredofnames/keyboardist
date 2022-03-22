@@ -21,24 +21,25 @@ function Keyboard() {
       toLayout = LAYOUTS[store.layout],
       mapping = {};
 
-    for (let row in fromLayout) {
+    for (let row in toLayout) {
       if (row === 'space') continue;
-      for (let type in fromLayout[row]) {
-        for (let side in fromLayout[row][type]) {
+      for (let type in toLayout[row]) {
+        for (let side in toLayout[row][type]) {
           for (
-            let i = 0, len = fromLayout[row][type][side].length;
+            let i = 0, len = toLayout[row][type][side].length;
             i < len;
             i++
           ) {
             let from = fromLayout[row][type][side][i],
               to = toLayout[row][type][side][i];
-            if (!from || !to) continue;
+            //if (!from || !to) continue;
 
             mapping[from] = to;
           }
         }
       }
     }
+    console.log(mapping);
     return mapping;
   };
 
@@ -49,7 +50,7 @@ function Keyboard() {
   });
 
   const onKeyDown = (e) => {
-    console.log(e.key);
+    //console.log(e.key, store.mapping[e.key]);
     let key =
         store.emulate && store.mapping[e.key] ? store.mapping[e.key] : e.key,
       newKeys = { ...state.keys, [key]: true };
@@ -79,7 +80,7 @@ function Keyboard() {
 
   return (
     <div class={styles.Keyboard}>
-      <Options setState={setState} />
+      <Options setState={setState} layouts={Object.keys(LAYOUTS)} />
       <div class={styles.container}>
         <Hand side="left" />
         <div class={styles.keys}>

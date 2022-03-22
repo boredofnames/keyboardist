@@ -6,14 +6,6 @@ import styles from './Keyboard.module.css';
 import Checkmark from '../common/Checkmark/Checkmark';
 
 function Options(props) {
-  const LAYOUT = {
-    QWERTY: 'qwerty',
-    QUERTYLA: 'qwertyla',
-    COLEMAK: 'colemak',
-    COLEMAK_DH: 'colemakdh',
-    WORKMAN: 'workman',
-    DVORAK: 'dvorak',
-  };
   const [store, { toggleEmulate, setLayout, setEmulateFrom }] = useRedux(
     reduxStore,
     actions
@@ -30,7 +22,7 @@ function Options(props) {
             document.activeElement.blur();
           }}
         >
-          <For each={Object.values(LAYOUT)}>
+          <For each={props.layouts}>
             {(layout) => <option value={layout}>{layout}</option>}
           </For>
         </select>{' '}
@@ -66,7 +58,7 @@ function Options(props) {
             document.activeElement.blur();
           }}
         >
-          <For each={Object.values(LAYOUT)}>
+          <For each={props.layouts}>
             {(layout) => <option value={layout}>{layout}</option>}
           </For>
         </select>
