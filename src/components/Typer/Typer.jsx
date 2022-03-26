@@ -1,8 +1,9 @@
-import { createEffect, onMount } from 'solid-js';
+import { createEffect, Match, onMount, Switch } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
 import actions from '../../store/actions';
+import Options from './Options';
 import randomWords from 'random-words';
 import { randomFrom } from '../../js/utils';
 import styles from './Typer.module.css';
@@ -95,6 +96,19 @@ function Typer() {
 
   let letterSetRef, symbolSetRef, wordMaxRef, sentenceRef;
 
+  const letterSetRefCallback = (el) => {
+    letterSetRef = el;
+  };
+  const symbolSetRefCallback = (el) => {
+    symbolSetRef = el;
+  };
+  const wordMaxRefCallback = (el) => {
+    wordMaxRef = el;
+  };
+  const sentenceRefCallback = (el) => {
+    sentenceRef = el;
+  };
+
   const generate = () => {
     let generated = [];
     if (state.type === 'letters') {
@@ -128,7 +142,12 @@ function Typer() {
   };
 
   const onKeyDown = (e) => {
-    if (state.locked || document.activeElement.tagName === 'TEXTAREA') return;
+    if (
+      state.locked ||
+      document.activeElement.tagName === 'TEXTAREA' ||
+      document.activeElement.tagName === 'INPUT'
+    )
+      return;
     if (state.start === null) setState('start', Date.now());
     let allowed = ['Backspace'],
       key =
@@ -213,78 +232,15 @@ function Typer() {
 
   return (
     <div class={styles.Typer}>
-      <div class={styles.options}>
-        <span class={styles.logo}>Keyboardist</span>
-        <select
-          onChange={(e) => {
-            setState({ type: e.target.value });
-            onGenChange(e);
-          }}
-        >
-          <option value="letters">Letters</option>
-          <option value="words">Words</option>
-          <option value="symbols">Symbols</option>
-          <option value="sentences">Sentences</option>
-        </select>
-        <Show when={state.type === 'letters'}>
-          <select
-            ref={letterSetRef}
-            onChange={() => {
-              setState({ text: generate(), typed: [], start: null });
-              document.activeElement.blur();
-            }}
-          >
-            <option value="first">First Set</option>
-            <option value="second">Second Set</option>
-            <option value="third">Third Set</option>
-            <option value="forth">Forth Set</option>
-            <option value="fifth">Fifth Set</option>
-            <option value="sixth">Sixth Set</option>
-            <option value="seventh">Seventh Set</option>
-          </select>
-        </Show>
-        <Show when={state.type === 'symbols'}>
-          <select
-            ref={symbolSetRef}
-            onChange={() => {
-              setState({ text: generate(), typed: [], start: null });
-              document.activeElement.blur();
-            }}
-          >
-            <option value="first">First Set</option>
-            <option value="second">Second Set</option>
-            <option value="third">Third Set</option>
-            <option value="forth">Forth Set</option>
-            <option value="fifth">Fifth Set</option>
-            <option value="sixth">Sixth Set</option>
-            <option value="seventh">Seventh Set</option>
-            <option value="eighth">Eighth Set</option>
-          </select>
-        </Show>
-        <Show when={state.type === 'words'}>
-          Max Length:{' '}
-          <input
-            type="number"
-            min="2"
-            max="16"
-            value="4"
-            ref={wordMaxRef}
-            onChange={onGenChange}
-          />
-        </Show>
-        <Show when={state.type === 'sentences'}>
-          <select ref={sentenceRef} onChange={onGenChange}>
-            <option value="pangrams">Pangrams</option>
-            <option value="long">Long</option>
-          </select>
-        </Show>
-        <span class={styles.stats}>
-          {' '}
-          Progress: {state.progress}% | Accuracy:{' '}
-          {isNaN(state.accuracy) ? 0 : state.accuracy}% | gWPM:
-          {state.wpm.gross} | nWPM: {state.wpm.net}
-        </span>
-      </div>
+      <Options
+        state={state}
+        setState={setState}
+        onGenChange={onGenChange}
+        letterSetRef={letterSetRefCallback}
+        symbolSetRef={symbolSetRefCallback}
+        wordMaxRef={wordMaxRefCallback}
+        sentenceRef={sentenceRefCallback}
+      />
       <div class={styles.text} tabIndex={0}>
         <For each={state.text.split('')}>
           {(letter, i) => (
