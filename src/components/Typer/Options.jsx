@@ -47,22 +47,16 @@ export default function Options(props) {
             max="16"
             value="4"
             ref={props.wordMaxRef}
-            onChange={onGenChange}
+            onChange={props.onGenChange}
           />
         </Match>
         <Match when={props.state.type === 'sentences'}>
-          <select ref={props.sentenceRef} onChange={onGenChange}>
+          <select ref={props.sentenceRef} onChange={props.onGenChange}>
             <option value="pangrams">Pangrams</option>
             <option value="long">Long</option>
           </select>
         </Match>
       </Switch>
-      <span class={styles.stats}>
-        {' '}
-        Progress: {props.state.progress}% | Accuracy:{' '}
-        {isNaN(props.state.accuracy) ? 0 : props.state.accuracy}% | gWPM:
-        {props.state.wpm.gross} | nWPM: {props.state.wpm.net}
-      </span>
     </div>
   );
 }

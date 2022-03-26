@@ -20,6 +20,7 @@ function Typer() {
     wpm: { gross: 0, net: 0 },
     start: null,
     locked: false,
+    errors: {},
   });
 
   const letterSets = {
@@ -160,14 +161,25 @@ function Typer() {
     e.preventDefault();
     if (key === 'Backspace') setState('typed', (t) => t.slice(0, t.length - 1));
     else setState('typed', (t) => [...t, key]);
-
+    let target = state.text[state.typed.length - 1].toLowerCase();
+    if (target !== ' ' && target !== key.toLowerCase()) {
+      let errors = { ...state.errors };
+      errors[target] = errors[target] ? errors[target] + 1 : 1;
+      setState({ errors });
+    }
     setNextLetter(state.text[state.typed.length]);
 
     if (state.typed.length >= state.text.length) {
       setState({ locked: true });
       setTimeout(
         () =>
-          setState({ typed: [], text: generate(), start: null, locked: false }),
+          setState({
+            typed: [],
+            text: generate(),
+            start: null,
+            locked: false,
+            errors: {},
+          }),
         5000
       );
     }
@@ -214,8 +226,24 @@ function Typer() {
   };
 
   const onGenChange = (e) => {
-    setState({ text: generate(), typed: [], start: null });
+    setState({ text: generate(), typed: [], start: null, errors: {} });
     document.activeElement.blur();
+  };
+
+  const zeroedNaN = (n) => {
+    return isNaN(n) ? 0 : n;
+  };
+
+  const prettyErrors = () => {
+    return Object.entries(state.errors)
+      .sort((a, b) => b[1] - a[1])
+      .reduce(
+        (p, c) =>
+          (p += `<span class="label">${c[0]}:</span><span class="${
+            c[1] < 10 ? 'medium' : 'low'
+          }">${c[1]} </span>`),
+        ''
+      );
   };
 
   createEffect(() => {
@@ -232,15 +260,21 @@ function Typer() {
 
   return (
     <div class={styles.Typer}>
-      <Options
-        state={state}
-        setState={setState}
-        onGenChange={onGenChange}
-        letterSetRef={letterSetRefCallback}
-        symbolSetRef={symbolSetRefCallback}
-        wordMaxRef={wordMaxRefCallback}
-        sentenceRef={sentenceRefCallback}
-      />
+      <header>
+        <Options
+          state={state}
+          setState={setState}
+          onGenChange={onGenChange}
+          letterSetRef={letterSetRefCallback}
+          symbolSetRef={symbolSetRefCallback}
+          wordMaxRef={wordMaxRefCallback}
+          sentenceRef={sentenceRefCallback}
+        />
+        <div class={styles.stats}>
+          Progress: {state.progress}% | Accuracy: {zeroedNaN(state.accuracy)}% |
+          gWPM: {zeroedNaN(state.wpm.gross)} | nWPM: {zeroedNaN(state.wpm.net)}
+        </div>
+      </header>
       <div class={styles.text} tabIndex={0}>
         <For each={state.text.split('')}>
           {(letter, i) => (
@@ -261,9 +295,46 @@ function Typer() {
       </div>
       <Show when={state.locked}>
         <div class={styles.finalStats}>
-          Accuracy: {isNaN(state.accuracy) ? 0 : state.accuracy}% <br />
-          gWPM: {state.wpm.gross} <br />
-          nWPM: {state.wpm.net}
+          <span class="label">Accuracy: </span>
+          <span
+            class={
+              zeroedNaN(state.accuracy) < 50
+                ? 'low'
+                : zeroedNaN(state.accuracy) > 90
+                ? 'high'
+                : 'medium'
+            }
+          >
+            {zeroedNaN(state.accuracy)}%
+          </span>
+          <span class="label">gWPM: </span>
+          <span
+            class={
+              zeroedNaN(state.wpm.gross) < 20
+                ? 'low'
+                : zeroedNaN(state.wpm.gross) > 90
+                ? 'high'
+                : 'medium'
+            }
+          >
+            {zeroedNaN(state.wpm.gross)}
+          </span>
+          <span class="label">nWPM: </span>
+          <span
+            class={
+              zeroedNaN(state.wpm.net) < 20
+                ? 'low'
+                : zeroedNaN(state.wpm.net) > 90
+                ? 'high'
+                : 'medium'
+            }
+          >
+            {zeroedNaN(state.wpm.net)}
+          </span>
+          <Show when={Object.keys(state.errors).length > 0}>
+            <span class="label">Mistakes: </span>{' '}
+            <span innerHTML={prettyErrors()} />
+          </Show>
         </div>
       </Show>
     </div>

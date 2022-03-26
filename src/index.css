@@ -34,3 +34,16 @@ select {
   border: 1px solid var(--color-lighter);
   padding: 2px;
 }
+
+.label {
+  color: var(--color-light);
+}
+.low {
+  color: red;
+}
+.medium {
+  color: orange;
+}
+.high {
+  color: lightgreen;
+}

@@ -4,6 +4,13 @@
   padding: 20px;
 }
 
+.Typer header {
+  display: flex;
+  width: fit-content;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-darker);
+}
+
 .Typer select {
   user-select: none;
 }
@@ -37,12 +44,6 @@
   margin-right: 20px;
 }
 
-.options {
-  width: fit-content;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--color-darker);
-}
-
 .letter {
   text-decoration: underline;
   text-underline-offset: 5px;
@@ -63,14 +64,19 @@
 
 .finalStats {
   position: absolute;
-  top: calc(50% - 100px);
+  top: 76px;
   left: calc(50% - 200px);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 400px;
-  height: 400px;
-  border-radius: 200px;
+  height: fit-content;
+  padding: 20px 40px;
   background-color: var(--color-darker);
   font-size: 2em;
+  filter: drop-shadow(6px 6px 6px black);
+  border-radius: 6px;
+  text-align: center;
+  z-index: 2;
 }

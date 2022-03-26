@@ -5,8 +5,3 @@
   color: var(--color-lighter);
   height: 100vh;
 }
-
-header {
-  padding: 20px;
-  background-color: var(--color-darker);
-}
