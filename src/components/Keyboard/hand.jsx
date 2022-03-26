@@ -67,9 +67,10 @@ function Hand(props) {
 
   const genKeys = (layout) => {
     let k = {};
-    Object.keys(layouts[layout]).map((row) =>
-      Object.keys(layouts[layout][row]).map((type) =>
-        layouts[layout][row][type][props.side].split('').map((letter, i) => {
+    let lo = store.layout === 'custom' ? store.customLayout : layouts[layout];
+    Object.keys(lo).map((row) =>
+      Object.keys(lo[row]).map((type) =>
+        lo[row][type][props.side].split('').map((letter, i) => {
           if (letter === ' ') return;
           k[letter] = i;
         })

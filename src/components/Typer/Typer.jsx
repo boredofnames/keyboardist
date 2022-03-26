@@ -21,6 +21,7 @@ function Typer() {
     accuracy: 0,
     wpm: { gross: 0, net: 0 },
     start: null,
+    locked: false,
   });
 
   const letterSets = {
@@ -90,7 +91,7 @@ function Typer() {
       "The houses over to Central Park West went first, they got darker as if dissolving into the dark sky until I couldn't make them out, and then the trees began to lose their shape, and finally, this was toward the end of the season, maybe it was late February of that very cold winter, and all I could see were these phantom shapes of the white ice, that last light, went gray and then altogether black, and then all my sight was gone though I could hear clearly the scoot scut of the blades on ice, a very satisfying sound, a soft sound though full of intention, a deeper tone that you'd expect made by the skate blades, perhaps for having sounded the resonant basso of the water under the ice, scoot scut, scoot scut.",
       'While the men made bullets and the women lint, while a large saucepan of melted brass and lead, destined to the bullet-mould smoked over a glowing brazier, while the sentinels watched, weapon in hand, on the barricade, while Enjolras, whom it was impossible to divert, kept an eye on the sentinels, Combeferre, Courfeyrac, Jean Prouvaire, Feuilly, Bossuet, Joly, Bahorel, and some others, sought each other out and united as in the most peaceful of days of their conversations in their student life, and, in one corner of this wine-shop which had been converted into a casement, a couple of paces distant from the redoubt which they had built, with their carbines loaded and primed resting against the backs of their chairs, these fine young fellows, so close to a supreme hour, began to recite love verses.',
       'But Pake knew a hundred dirt road shortcuts, steering them through scabland and slope country, in and out of the tiger shits, over the tawny plain still grooved with pilgrim wagon ruts, into early darkness and the first storm laying down black ice, hard orange dawn, the world smoking, snaking dust devils on bare dirt, heat boiling out of the sun until the paint on the truck hood curled, ragged webs of dry rain that never hit the ground, through small-town traffic and stock on the road, band of horses in morning fog, two redheaded cowboys moving a house that filled the roadway and Pake busting around and into the ditch to get past, leaving junkyards and Mexican cafes behind, turning into midnight motel entrances with RING OFFICE BELL signs or steering onto the black prairie for a stunned hour of sleep.',
-      "Elizabeth, New Jersey, when my mother was being raised there in a flat over her father's grocery store, was an industrial port a quarter the size of Newark, dominated by the Irish working class and their politicians and the tightly knit parish life that revolved around the town's many churches, and though I never heard her complain of having been pointedly ill-treated in Elizabeth as a girl, it was not until she married and moved to Newark's new Jewish neighborhood that she discovered the confidence that led her to become first a PTA “grade mother,” then a PTA vice president in charge of establishing a Kindergarten Mothers' Club, and finally the PTA president, who, after attending a conference in Trenton on infantile paralysis, proposed an annual March of Dimes dance on January 30 - President Roosevelt's birthday - that was accepted by most schools.",
+      "Elizabeth, New Jersey, when my mother was being raised there in a flat over her father's grocery store, was an industrial port a quarter the size of Newark, dominated by the Irish working class and their politicians and the tightly knit parish life that revolved around the town's many churches, and though I never heard her complain of having been pointedly ill-treated in Elizabeth as a girl, it was not until she married and moved to Newark's new Jewish neighborhood that she discovered the confidence that led her to become first a PTA \"grade mother,\" then a PTA vice president in charge of establishing a Kindergarten Mothers' Club, and finally the PTA president, who, after attending a conference in Trenton on infantile paralysis, proposed an annual March of Dimes dance on January 30 - President Roosevelt's birthday - that was accepted by most schools.",
       "He had time for one subversive thought about his parents' Nordic Pleasurelines shoulder bags - either Nordic Pleasurelines sent bags like these to every booker of its cruises as a cynical means of getting inexpensive walk-about publicity or as a practical means of tagging the cruise participants for greater ease of handling at embarkation points or as a benign means of building espirit de corps; or else Enid and Alfred had deliberately saved the bags from some previous Nordic Pleasurelines cruise, and, out a misguided sense of loyalty, had chosen to carry them on their upcoming cruise as well; and in either case Chip was appalled by his parents' willingness to make themselves vectors of corporate advertising - before he shouldered the bags himself and assumed the burden of seeing LaGuardia Airport and New York City and his life and clothes and body through the disappointed eyes of his parents.",
     ],
   };
@@ -130,6 +131,7 @@ function Typer() {
   };
 
   const onKeyDown = (e) => {
+    if (state.locked || document.activeElement.tagName === 'TEXTAREA') return;
     if (state.start === null) setState('start', Date.now());
     let allowed = ['Backspace'],
       key =
@@ -145,11 +147,15 @@ function Typer() {
 
     setNextLetter(state.text[state.typed.length]);
 
-    if (state.typed.length >= state.text.length)
+    if (state.typed.length >= state.text.length) {
+      setState({ locked: true });
+      console.log('todo show stats');
       setTimeout(
-        () => setState({ typed: [], text: generate(), start: null }),
-        2000
+        () =>
+          setState({ typed: [], text: generate(), start: null, locked: false }),
+        5000
       );
+    }
   };
 
   onMount(() => {
@@ -301,6 +307,13 @@ function Typer() {
           )}
         </For>
       </div>
+      <Show when={state.locked}>
+        <div class={styles.finalStats}>
+          Accuracy: {isNaN(state.accuracy) ? 0 : state.accuracy}% <br />
+          gWPM: {state.wpm.gross} <br />
+          nWPM: {state.wpm.net}
+        </div>
+      </Show>
     </div>
   );
 }

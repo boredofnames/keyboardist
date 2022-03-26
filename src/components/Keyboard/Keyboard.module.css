@@ -99,3 +99,11 @@
   flex-direction: column;
   justify-content: flex-end;
 }
+
+textarea {
+  background-color: var(--color-darker);
+  color: var(--color-lighter);
+  font-size: 1.2rem;
+  width: 340px;
+  height: 400px;
+}

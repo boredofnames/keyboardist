@@ -6,6 +6,28 @@ const app = (
     emulate: storage.get('emulate') || false,
     emulateFrom: storage.get('emulatefrom') || 'qwerty',
     layout: storage.get('layout') || 'qwerty',
+    customLayout: storage.get('customLayout') || {
+      number: {
+        main: { left: '`12345', right: '67890-=' },
+        caps: { left: '~!@#$%', right: '^&*()_+' },
+      },
+      top: {
+        main: { left: 'qwert', right: 'yuiop[]\\' },
+        caps: { left: 'QWERT', right: 'YUIOP{}|' },
+      },
+      mid: {
+        main: { left: 'asdfg', right: "hjkl;'" },
+        caps: { left: 'ASDFG', right: 'HJKL:"' },
+      },
+      bottom: {
+        main: { left: 'zxcvb', right: 'nm,./' },
+        caps: { left: 'ZXCVB', right: 'NM<>?' },
+      },
+      space: {
+        main: { left: ' ', right: ' ' },
+        caps: { left: ' ', right: ' ' },
+      },
+    },
     letter: null,
     mapping: {},
   },
@@ -20,6 +42,9 @@ const app = (
 
     case 'SET_LAYOUT':
       return { ...state, layout: action.layout };
+
+    case 'SET_CUSTOM_LAYOUT':
+      return { ...state, customLayout: action.layout };
 
     case 'SET_NEXT_LETTER':
       return {

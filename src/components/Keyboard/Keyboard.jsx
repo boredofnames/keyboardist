@@ -18,7 +18,7 @@ function Keyboard() {
 
   const buildMapping = (emulateFrom) => {
     let fromLayout = LAYOUTS[emulateFrom],
-      toLayout = LAYOUTS[store.layout],
+      toLayout = state.layout || store.customLayout,
       mapping = {};
 
     for (let row in toLayout) {
@@ -47,6 +47,7 @@ function Keyboard() {
     split: false,
     ortholinear: false,
     keys: {},
+    layout: LAYOUTS[store.layout] || store.customLayout,
   });
 
   const onKeyDown = (e) => {
@@ -74,6 +75,10 @@ function Keyboard() {
   });
 
   createEffect(() => {
+    setState({ layout: LAYOUTS[store.layout] || store.customLayout });
+  });
+
+  createEffect(() => {
     setMapping(buildMapping(store.emulateFrom));
     console.log('built mapping');
   });
@@ -84,10 +89,7 @@ function Keyboard() {
       <div class={styles.container}>
         <Hand side="left" />
         <div class={styles.keys}>
-          <For
-            each={Object.keys(LAYOUTS[store.layout])}
-            fallback={<div>Loading..</div>}
-          >
+          <For each={Object.keys(state.layout)} fallback={<div>Loading..</div>}>
             {(row) => (
               <div
                 class={styles.row}
@@ -110,15 +112,13 @@ function Keyboard() {
               >
                 <For
                   each={Object.keys(
-                    LAYOUTS[store.layout][row][
-                      state.keys['Shift'] ? 'caps' : 'main'
-                    ]
+                    state.layout[row][state.keys['Shift'] ? 'caps' : 'main']
                   )}
                 >
                   {(side) => (
                     <>
                       <For
-                        each={LAYOUTS[store.layout][row][
+                        each={state.layout[row][
                           state.keys['Shift'] ? 'caps' : 'main'
                         ][side].split('')}
                       >
