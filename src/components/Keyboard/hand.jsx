@@ -70,9 +70,10 @@ function Hand(props) {
     let lo = store.layout === 'custom' ? store.customLayout : layouts[layout];
     Object.keys(lo).map((row) =>
       Object.keys(lo[row]).map((type) =>
-        lo[row][type][props.side].split('').map((letter, i) => {
-          if (letter === ' ') return;
-          k[letter] = i;
+        lo[row][type][props.side].split('').map((key, i) => {
+          if (key === ' ') return;
+          else if (row === 'number' && i > 0) k[key] = i - 1;
+          else k[key] = i;
         })
       )
     );
@@ -82,8 +83,6 @@ function Hand(props) {
   createEffect(() => setKeys(genKeys(store.layout)));
 
   const isActive = (finger) => finger.ids.includes(keys()[store.letter]);
-
-  // const isUpperCase = (key) =>
 
   return (
     <div class={styles.hand}>

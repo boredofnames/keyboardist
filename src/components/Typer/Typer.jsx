@@ -1,13 +1,10 @@
 import { createEffect, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
-
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
 import actions from '../../store/actions';
-
 import randomWords from 'random-words';
 import { randomFrom } from '../../js/utils';
-
 import styles from './Typer.module.css';
 
 function Typer() {
@@ -149,7 +146,6 @@ function Typer() {
 
     if (state.typed.length >= state.text.length) {
       setState({ locked: true });
-      console.log('todo show stats');
       setTimeout(
         () =>
           setState({ typed: [], text: generate(), start: null, locked: false }),

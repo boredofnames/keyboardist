@@ -3,15 +3,12 @@ import { createStore } from 'solid-js/store';
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
 import actions from '../../store/actions';
-
 import { filterObject } from '../../js/utils';
 import Key from './Key';
 import LAYOUTS from './layouts.json';
-
-import styles from './Keyboard.module.css';
-
 import Hand from './Hand';
 import Options from './Options';
+import styles from './Keyboard.module.css';
 
 function Keyboard() {
   const [store, { setMapping }] = useRedux(reduxStore, actions);
@@ -32,14 +29,13 @@ function Keyboard() {
           ) {
             let from = fromLayout[row][type][side][i],
               to = toLayout[row][type][side][i];
-            //if (!from || !to) continue;
-
+            if (!from || !to) continue;
             mapping[from] = to;
           }
         }
       }
     }
-    console.log(mapping);
+    //console.log(mapping);
     return mapping;
   };
 
@@ -80,7 +76,7 @@ function Keyboard() {
 
   createEffect(() => {
     setMapping(buildMapping(store.emulateFrom));
-    console.log('built mapping');
+    //console.log('built mapping');
   });
 
   return (

@@ -79,7 +79,7 @@ function Options(props) {
             spellCheck="false"
           />
         </Show>
-        <label id="importlabel" onClick={(e) => e.stopPropagation()}>
+        <label id="importlabel">
           Load
           <input
             type="file"
@@ -88,7 +88,7 @@ function Options(props) {
             style={{ display: 'none' }}
           />
         </label>{' '}
-        <label id="exportlabel" onClick={(e) => e.stopPropagation()}>
+        <label id="exportlabel">
           <a classname="export" onClick={save}>
             Save
           </a>
