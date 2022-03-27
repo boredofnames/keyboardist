@@ -8,7 +8,7 @@ export default function Options(props) {
         ref={props.categoryRef}
         onChange={(e) => {
           props.setState({ type: e.target.value });
-          props.onGenChange(e);
+          props.restart();
         }}
       >
         <option value="letters">Letters</option>
@@ -18,7 +18,7 @@ export default function Options(props) {
       </select>
       <Switch>
         <Match when={props.state.type === 'letters'}>
-          <select ref={props.letterSetRef} onChange={props.onGenChange}>
+          <select ref={props.letterSetRef} onChange={props.restart}>
             <option value="first">First Set</option>
             <option value="second">Second Set</option>
             <option value="third">Third Set</option>
@@ -30,7 +30,7 @@ export default function Options(props) {
           </select>
         </Match>
         <Match when={props.state.type === 'symbols'}>
-          <select ref={props.symbolSetRef} onChange={props.onGenChange}>
+          <select ref={props.symbolSetRef} onChange={props.restart}>
             <option value="first">First Set</option>
             <option value="second">Second Set</option>
             <option value="third">Third Set</option>
@@ -49,11 +49,11 @@ export default function Options(props) {
             max="16"
             value="4"
             ref={props.wordMaxRef}
-            onChange={props.onGenChange}
+            onChange={props.restart}
           />
         </Match>
         <Match when={props.state.type === 'sentences'}>
-          <select ref={props.sentenceRef} onChange={props.onGenChange}>
+          <select ref={props.sentenceRef} onChange={props.restart}>
             <option value="pangrams">Pangrams</option>
             <option value="long">Long</option>
           </select>

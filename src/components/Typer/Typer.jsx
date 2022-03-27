@@ -238,18 +238,6 @@ function Typer() {
     return { gross, net };
   };
 
-  const onGenChange = (e) => {
-    setState({
-      text: generate(),
-      typed: [],
-      start: null,
-      errors: {},
-      locked: false,
-      cd: 10,
-    });
-    document.activeElement.blur();
-  };
-
   const zeroedNaN = (n) => {
     return isNaN(n) ? 0 : n;
   };
@@ -268,7 +256,15 @@ function Typer() {
 
   const restart = () => {
     clearInterval(countdown);
-    onGenChange();
+    setState({
+      text: generate(),
+      typed: [],
+      start: null,
+      errors: {},
+      locked: false,
+      cd: 10,
+    });
+    document.activeElement.blur();
   };
 
   const practice = () => {
@@ -296,7 +292,7 @@ function Typer() {
         <Options
           state={state}
           setState={setState}
-          onGenChange={onGenChange}
+          restart={restart}
           categoryRef={categoryRefCallback}
           letterSetRef={letterSetRefCallback}
           symbolSetRef={symbolSetRefCallback}
