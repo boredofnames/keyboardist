@@ -21,6 +21,8 @@ function Typer() {
     start: null,
     locked: false,
     errors: {},
+    cd: 10,
+    practice: 'abcdefghijklmnopqrstuvwxyz',
   });
 
   const letterSets = {
@@ -95,8 +97,16 @@ function Typer() {
     ],
   };
 
-  let letterSetRef, symbolSetRef, wordMaxRef, sentenceRef;
+  let categoryRef,
+    letterSetRef,
+    symbolSetRef,
+    wordMaxRef,
+    sentenceRef,
+    countdown;
 
+  const categoryRefCallback = (el) => {
+    categoryRef = el;
+  };
   const letterSetRefCallback = (el) => {
     letterSetRef = el;
   };
@@ -113,7 +123,10 @@ function Typer() {
   const generate = () => {
     let generated = [];
     if (state.type === 'letters') {
-      let set = letterSets[letterSetRef.value].split('');
+      let set =
+        letterSetRef.value === 'practice'
+          ? state.practice.split('')
+          : letterSets[letterSetRef.value].split('');
       while (generated.length < 99)
         generated.push(
           generated.length != 0 && (generated.length + 1) % 5 === 0
@@ -142,6 +155,13 @@ function Typer() {
     return generated;
   };
 
+  const doCountdown = () => {
+    setState('cd', (v) => (v -= 1));
+    if (state.cd > 0) return;
+    clearInterval(countdown);
+    restart();
+  };
+
   const onKeyDown = (e) => {
     if (
       state.locked ||
@@ -161,27 +181,20 @@ function Typer() {
     e.preventDefault();
     if (key === 'Backspace') setState('typed', (t) => t.slice(0, t.length - 1));
     else setState('typed', (t) => [...t, key]);
-    let target = state.text[state.typed.length - 1].toLowerCase();
-    if (target !== ' ' && target !== key.toLowerCase()) {
-      let errors = { ...state.errors };
-      errors[target] = errors[target] ? errors[target] + 1 : 1;
-      setState({ errors });
+
+    if (state.typed.length - 1 >= 0) {
+      let target = state.text[state.typed.length - 1].toLowerCase();
+      if (target !== ' ' && target !== key.toLowerCase()) {
+        let errors = { ...state.errors };
+        errors[target] = errors[target] ? errors[target] + 1 : 1;
+        setState({ errors });
+      }
     }
     setNextLetter(state.text[state.typed.length]);
 
     if (state.typed.length >= state.text.length) {
       setState({ locked: true });
-      setTimeout(
-        () =>
-          setState({
-            typed: [],
-            text: generate(),
-            start: null,
-            locked: false,
-            errors: {},
-          }),
-        5000
-      );
+      countdown = setInterval(doCountdown, 1000);
     }
   };
 
@@ -226,7 +239,14 @@ function Typer() {
   };
 
   const onGenChange = (e) => {
-    setState({ text: generate(), typed: [], start: null, errors: {} });
+    setState({
+      text: generate(),
+      typed: [],
+      start: null,
+      errors: {},
+      locked: false,
+      cd: 10,
+    });
     document.activeElement.blur();
   };
 
@@ -244,6 +264,18 @@ function Typer() {
           }">${c[1]} </span>`),
         ''
       );
+  };
+
+  const restart = () => {
+    clearInterval(countdown);
+    onGenChange();
+  };
+
+  const practice = () => {
+    setState({ practice: Object.keys(state.errors).join(''), type: 'letters' });
+    categoryRef.value = 'letters';
+    letterSetRef.value = 'practice';
+    restart();
   };
 
   createEffect(() => {
@@ -265,6 +297,7 @@ function Typer() {
           state={state}
           setState={setState}
           onGenChange={onGenChange}
+          categoryRef={categoryRefCallback}
           letterSetRef={letterSetRefCallback}
           symbolSetRef={symbolSetRefCallback}
           wordMaxRef={wordMaxRefCallback}
@@ -334,7 +367,13 @@ function Typer() {
           <Show when={Object.keys(state.errors).length > 0}>
             <span class="label">Mistakes: </span>{' '}
             <span innerHTML={prettyErrors()} />
+            <div class="button" onClick={practice}>
+              Practice
+            </div>
           </Show>
+          <div class="button" onClick={restart}>
+            Continue {state.cd}
+          </div>
         </div>
       </Show>
     </div>

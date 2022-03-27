@@ -47,3 +47,20 @@ select {
 .high {
   color: lightgreen;
 }
+
+.button {
+  background-color: var(--color-light);
+  color: var(--color-darker);
+  padding: 2px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.5s 0s ease;
+  user-select: none;
+  margin: 4px;
+}
+.button:hover {
+  background-color: var(--color-lighter);
+}
+.button:active {
+  background-color: var(--color-dark);
+}

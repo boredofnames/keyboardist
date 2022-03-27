@@ -5,6 +5,7 @@ export default function Options(props) {
     <div class={styles.options}>
       <span class={styles.logo}>Keyboardist</span>
       <select
+        ref={props.categoryRef}
         onChange={(e) => {
           props.setState({ type: e.target.value });
           props.onGenChange(e);
@@ -25,6 +26,7 @@ export default function Options(props) {
             <option value="fifth">Fifth Set</option>
             <option value="sixth">Sixth Set</option>
             <option value="seventh">Seventh Set</option>
+            <option value="practice">Practice Set</option>
           </select>
         </Match>
         <Match when={props.state.type === 'symbols'}>
