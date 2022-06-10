@@ -4,11 +4,14 @@ import actions from '../../store/actions';
 import storage from '../../js/storage';
 import styles from './Keyboard.module.css';
 import Checkmark from '../common/Checkmark/Checkmark';
-import { createSignal } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
+import LAYOUTS from './layouts.json';
 
 function Options(props) {
-  const [store, { toggleEmulate, setLayout, setEmulateFrom, setCustomLayout }] =
-    useRedux(reduxStore, actions);
+  const [
+    store,
+    { toggleEmulate, setLayout, setEmulateFrom, setCustomLayout, setStandard },
+  ] = useRedux(reduxStore, actions);
 
   const [showCustom, setShowCustom] = createSignal(false);
 
@@ -53,6 +56,25 @@ function Options(props) {
   return (
     <div class={styles.options}>
       <label>
+        Standard:{' '}
+        <select
+          value={store.standard}
+          onChange={(e) => {
+            setStandard(e.target.value);
+            storage.set('standard', e.target.value);
+            document.activeElement.blur();
+          }}
+        >
+          <For each={['ansi', 'iso']}>
+            {(standard) => (
+              <Show when={LAYOUTS[store.layout][standard]}>
+                <option value={standard}>{standard}</option>
+              </Show>
+            )}
+          </For>
+        </select>{' '}
+      </label>
+      <label>
         Layout:{' '}
         <select
           value={store.layout}
@@ -62,7 +84,7 @@ function Options(props) {
             document.activeElement.blur();
           }}
         >
-          <For each={props.layouts}>
+          <For each={Object.keys(LAYOUTS)}>
             {(layout) => <option value={layout}>{layout}</option>}
           </For>
           <option value="custom">custom</option>
@@ -125,7 +147,7 @@ function Options(props) {
             document.activeElement.blur();
           }}
         >
-          <For each={props.layouts}>
+          <For each={Object.keys(LAYOUTS)}>
             {(layout) => <option value={layout}>{layout}</option>}
           </For>
         </select>

@@ -1,9 +1,8 @@
-import styles from './Typer.module.css';
+import styles from './Trainer.module.css';
 
 export default function Options(props) {
   return (
     <div class={styles.options}>
-      <span class={styles.logo}>Keyboardist</span>
       <select
         ref={props.categoryRef}
         onChange={(e) => {

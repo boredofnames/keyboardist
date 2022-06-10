@@ -1,4 +1,4 @@
-import { createEffect, onMount } from 'solid-js';
+import { createEffect, createMemo, onCleanup, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
@@ -10,12 +10,12 @@ import Hand from './Hand';
 import Options from './Options';
 import styles from './Keyboard.module.css';
 
-function Keyboard() {
+function Keyboard(props) {
   const [store, { setMapping }] = useRedux(reduxStore, actions);
 
   const buildMapping = (emulateFrom) => {
-    let fromLayout = LAYOUTS[emulateFrom],
-      toLayout = state.layout || store.customLayout,
+    let fromLayout = getLayout(LAYOUTS[emulateFrom]),
+      toLayout = layout() || store.customLayout,
       mapping = {};
 
     for (let row in toLayout) {
@@ -35,7 +35,7 @@ function Keyboard() {
         }
       }
     }
-    //console.log(mapping);
+    console.log(mapping);
     return mapping;
   };
 
@@ -65,11 +65,6 @@ function Keyboard() {
     });
   };
 
-  onMount(() => {
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('keyup', onKeyUp);
-  });
-
   createEffect(() => {
     setState({ layout: LAYOUTS[store.layout] || store.customLayout });
   });
@@ -79,13 +74,34 @@ function Keyboard() {
     //console.log('built mapping');
   });
 
+  onMount(() => {
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('keyup', onKeyUp);
+  });
+
+  onCleanup(() => {
+    document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('keyup', onKeyUp);
+  });
+
+  const getLayout = (from) =>
+    store.standard === 'iso'
+      ? { ...from['ansi'], ...from['iso'] }
+      : from['ansi'];
+
+  let layout = createMemo(() => getLayout(state.layout));
+
   return (
-    <div class={styles.Keyboard}>
-      <Options setState={setState} layouts={Object.keys(LAYOUTS)} />
+    <div class={styles.Keyboard} classList={{ [styles.fit]: props.minimal }}>
+      <Show when={!props.minimal}>
+        <Options setState={setState} />
+      </Show>
       <div class={styles.container}>
-        <Hand side="left" />
+        <Show when={!props.minimal}>
+          <Hand side="left" />
+        </Show>
         <div class={styles.keys}>
-          <For each={Object.keys(state.layout)} fallback={<div>Loading..</div>}>
+          <For each={Object.keys(layout())} fallback={<div>Loading..</div>}>
             {(row) => (
               <div
                 class={styles.row}
@@ -98,7 +114,9 @@ function Keyboard() {
                       : !state.ortholinear && row === 'mid'
                       ? '10px'
                       : !state.ortholinear && row === 'bottom'
-                      ? '42px'
+                      ? store.standard === 'ansi'
+                        ? '42px'
+                        : '-12px'
                       : !state.ortholinear && row === 'number'
                       ? '-82px'
                       : state.ortholinear && row === 'number'
@@ -108,13 +126,13 @@ function Keyboard() {
               >
                 <For
                   each={Object.keys(
-                    state.layout[row][state.keys['Shift'] ? 'caps' : 'main']
+                    layout()[row][state.keys['Shift'] ? 'caps' : 'main']
                   )}
                 >
                   {(side) => (
                     <>
                       <For
-                        each={state.layout[row][
+                        each={layout()[row][
                           state.keys['Shift'] ? 'caps' : 'main'
                         ][side].split('')}
                       >
@@ -141,7 +159,9 @@ function Keyboard() {
             )}
           </For>
         </div>
-        <Hand side="right" />
+        <Show when={!props.minimal}>
+          <Hand side="right" />
+        </Show>
       </div>
     </div>
   );

@@ -1,0 +1,26 @@
+.button {
+  background-color: var(--color-light);
+  color: var(--color-darker);
+  padding: 6px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.5s 0s ease;
+  user-select: none;
+  margin: 4px;
+  width: fit-content;
+  font-size: 1.5rem;
+  filter: drop-shadow(2px 2px 2px black);
+}
+.button:hover {
+  background-color: var(--color-lighter);
+}
+.button:active {
+  background-color: var(--color-dark);
+}
+.button:focus {
+  outline: 1px solid white;
+}
+
+.button a {
+  color: var(--color-darker);
+}

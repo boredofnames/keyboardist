@@ -39,7 +39,7 @@ function Hand(props) {
     ],
     right: [
       {
-        ids: [4, 5],
+        ids: [4, 5, 6, 7],
         name: 'pinky',
         bottom: 82,
         left: 222,
@@ -67,7 +67,10 @@ function Hand(props) {
 
   const genKeys = (layout) => {
     let k = {};
-    let lo = store.layout === 'custom' ? store.customLayout : layouts[layout];
+    let lo =
+      store.layout === 'custom'
+        ? store.customLayout
+        : layouts[layout][store.standard];
     Object.keys(lo).map((row) =>
       Object.keys(lo[row]).map((type) =>
         lo[row][type][props.side].split('').map((key, i) => {

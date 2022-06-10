@@ -1,0 +1,11 @@
+.caret {
+  color: gray;
+  animation: blink 1s steps(5, start) infinite;
+  user-select: none;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}

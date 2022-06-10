@@ -48,19 +48,16 @@ select {
   color: lightgreen;
 }
 
-.button {
-  background-color: var(--color-light);
-  color: var(--color-darker);
-  padding: 2px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.5s 0s ease;
-  user-select: none;
-  margin: 4px;
+.flex-spacer {
+  flex: 1;
 }
-.button:hover {
-  background-color: var(--color-lighter);
+
+.active {
+  text-decoration: underline;
 }
-.button:active {
-  background-color: var(--color-dark);
+
+a {
+  text-decoration: none;
+}
+a:hover {
 }

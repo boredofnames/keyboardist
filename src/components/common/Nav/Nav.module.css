@@ -1,0 +1,19 @@
+.Nav {
+  display: flex;
+  padding: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-darker);
+  background-color: var(--color-dark);
+}
+
+.Nav a {
+  margin: 0 5px;
+  color: var(--color-lightest);
+}
+
+.logo {
+  font-family: 'Nova Mono', monospace;
+  user-select: none;
+  color: var(--color-lightest);
+  text-decoration: none;
+}

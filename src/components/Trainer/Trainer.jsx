@@ -1,14 +1,16 @@
-import { createEffect, Match, onMount, Switch } from 'solid-js';
+import { createEffect, onCleanup, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import useRedux from '../../store/useRedux';
 import reduxStore from '../../store/store';
 import actions from '../../store/actions';
+import Nav from '../common/Nav/Nav';
 import Options from './Options';
 import randomWords from 'random-words';
 import { randomFrom } from '../../js/utils';
-import styles from './Typer.module.css';
+import Button from '../common/Button/Button';
+import styles from './Trainer.module.css';
 
-function Typer() {
+function Trainer() {
   const [store, { setNextLetter }] = useRedux(reduxStore, actions);
 
   const [state, setState] = createStore({
@@ -194,14 +196,10 @@ function Typer() {
 
     if (state.typed.length >= state.text.length) {
       setState({ locked: true });
+      setNextLetter('♥');
       countdown = setInterval(doCountdown, 1000);
     }
   };
-
-  onMount(() => {
-    document.addEventListener('keydown', onKeyDown);
-    setState('text', generate());
-  });
 
   const getAccuracy = () => {
     let typed = state.typed.length,
@@ -286,9 +284,19 @@ function Typer() {
     });
   });
 
+  onMount(() => {
+    document.addEventListener('keydown', onKeyDown);
+    setState('text', generate());
+  });
+
+  onCleanup(() => {
+    setNextLetter('♥');
+    document.removeEventListener('keydown', onKeyDown);
+  });
+
   return (
-    <div class={styles.Typer}>
-      <header>
+    <div class={styles.Trainer}>
+      <Nav>
         <Options
           state={state}
           setState={setState}
@@ -303,7 +311,8 @@ function Typer() {
           Progress: {state.progress}% | Accuracy: {zeroedNaN(state.accuracy)}% |
           gWPM: {zeroedNaN(state.wpm.gross)} | nWPM: {zeroedNaN(state.wpm.net)}
         </div>
-      </header>
+      </Nav>
+
       <div class={styles.text} tabIndex={0}>
         <For each={state.text.split('')}>
           {(letter, i) => (
@@ -363,17 +372,15 @@ function Typer() {
           <Show when={Object.keys(state.errors).length > 0}>
             <span class="label">Mistakes: </span>{' '}
             <span innerHTML={prettyErrors()} />
-            <div class="button" onClick={practice}>
-              Practice
-            </div>
+            <Button onClick={practice}>Practice</Button>
           </Show>
-          <div class="button" onClick={restart}>
+          <Button focus onClick={restart}>
             Continue {state.cd}
-          </div>
+          </Button>
         </div>
       </Show>
     </div>
   );
 }
 
-export default Typer;
+export default Trainer;

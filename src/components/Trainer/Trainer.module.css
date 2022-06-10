@@ -1,29 +1,22 @@
-.Typer {
+.Trainer {
   position: relative;
   flex: 1;
-  padding: 20px;
+  background-color: var(--color-darker);
 }
 
-.Typer header {
-  display: flex;
-  width: fit-content;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--color-darker);
-}
-
-.Typer select {
+.Trainer select {
   user-select: none;
 }
 
-.Typer select:nth-child(2) {
+.Trainer select {
   margin-right: 10px;
 }
 
-.Typer select:nth-child(3) {
-  margin-right: 20px;
+.Trainer select:nth-child(1) {
+  margin-left: 5px;
 }
 
-.Typer input {
+.Trainer input {
   width: 40px;
   margin-right: 10px;
 }
@@ -36,12 +29,7 @@
   font-family: 'Oxygen Mono', monospace;
   user-select: none;
   outline: none;
-}
-
-.logo {
-  font-family: 'Nova Mono', monospace;
-  user-select: none;
-  margin-right: 20px;
+  padding: 20px;
 }
 
 .letter {
@@ -56,7 +44,7 @@
   color: var(--color-active);
 }
 .letter.correct {
-  color: var(--color-darker);
+  color: var(--color-dark);
 }
 .letter.incorrect {
   color: red;

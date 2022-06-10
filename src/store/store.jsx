@@ -30,6 +30,7 @@ const app = (
     },
     letter: null,
     mapping: {},
+    standard: 'ansi',
   },
   action
 ) => {
@@ -56,6 +57,12 @@ const app = (
       return {
         ...state,
         mapping: action.mapping,
+      };
+
+    case 'SET_STANDARD':
+      return {
+        ...state,
+        standard: action.standard,
       };
 
     default:

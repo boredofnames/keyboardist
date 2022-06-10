@@ -1,156 +1,204 @@
 {
   "qwerty": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890-=" },
-      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890-=" },
+        "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+      },
+      "top": {
+        "main": { "left": "qwert", "right": "yuiop[]\\" },
+        "caps": { "left": "QWERT", "right": "YUIOP{}|" }
+      },
+      "mid": {
+        "main": { "left": "asdfg", "right": "hjkl;'" },
+        "caps": { "left": "ASDFG", "right": "HJKL:\"" }
+      },
+      "bottom": {
+        "main": { "left": "zxcvb", "right": "nm,./" },
+        "caps": { "left": "ZXCVB", "right": "NM<>?" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     },
-    "top": {
-      "main": { "left": "qwert", "right": "yuiop[]\\" },
-      "caps": { "left": "QWERT", "right": "YUIOP{}|" }
-    },
-    "mid": {
-      "main": { "left": "asdfg", "right": "hjkl;'" },
-      "caps": { "left": "ASDFG", "right": "HJKL:\"" }
-    },
-    "bottom": {
-      "main": { "left": "zxcvb", "right": "nm,./" },
-      "caps": { "left": "ZXCVB", "right": "NM<>?" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "iso": {
+      "bottom": {
+        "main": { "left": "\\zxcvb", "right": "nm,./" },
+        "caps": { "left": "|ZXCVB", "right": "NM<>?" }
+      }
     }
   },
   "qwertyla": {
-    "number": {
-      "main": { "left": "|12345", "right": "67890'¿" },
-      "caps": { "left": "°!\"#$%", "right": "&/()=?¡" }
-    },
-    "top": {
-      "main": { "left": "qwert", "right": "yuiop´+" },
-      "caps": { "left": "QWERT", "right": "YUIOP¨*" }
-    },
-    "mid": {
-      "main": { "left": "asdfg", "right": "hjklñ{}" },
-      "caps": { "left": "ASDFG", "right": "HJKLÑ[]" }
-    },
-    "bottom": {
-      "main": { "left": "zxcvb", "right": "nm,.-" },
-      "caps": { "left": "ZXCVB", "right": "NM;:_" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "ansi": {
+      "number": {
+        "main": { "left": "|12345", "right": "67890'¿" },
+        "caps": { "left": "°!\"#$%", "right": "&/()=?¡" }
+      },
+      "top": {
+        "main": { "left": "qwert", "right": "yuiop´+" },
+        "caps": { "left": "QWERT", "right": "YUIOP¨*" }
+      },
+      "mid": {
+        "main": { "left": "asdfg", "right": "hjklñ{}" },
+        "caps": { "left": "ASDFG", "right": "HJKLÑ[]" }
+      },
+      "bottom": {
+        "main": { "left": "zxcvb", "right": "nm,.-" },
+        "caps": { "left": "ZXCVB", "right": "NM;:_" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   },
   "colemak": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890-=" },
-      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
-    },
-    "top": {
-      "main": { "left": "qwfpg", "right": "jluy;[]\\" },
-      "caps": { "left": "QWFPG", "right": "JLUY:{}|" }
-    },
-    "mid": {
-      "main": { "left": "arstd", "right": "hneio'" },
-      "caps": { "left": "ARSTD", "right": "HNEIO\"" }
-    },
-    "bottom": {
-      "main": { "left": "zxcvb", "right": "km,./" },
-      "caps": { "left": "ZXCVB", "right": "KM<>?" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890-=" },
+        "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+      },
+      "top": {
+        "main": { "left": "qwfpg", "right": "jluy;[]\\" },
+        "caps": { "left": "QWFPG", "right": "JLUY:{}|" }
+      },
+      "mid": {
+        "main": { "left": "arstd", "right": "hneio'" },
+        "caps": { "left": "ARSTD", "right": "HNEIO\"" }
+      },
+      "bottom": {
+        "main": { "left": "zxcvb", "right": "km,./" },
+        "caps": { "left": "ZXCVB", "right": "KM<>?" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   },
   "colemakdh": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890-=" },
-      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890-=" },
+        "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+      },
+      "top": {
+        "main": { "left": "qwfpb", "right": "jluy;[]\\" },
+        "caps": { "left": "QWFPB", "right": "JLUY:{}|" }
+      },
+      "mid": {
+        "main": { "left": "arstg", "right": "mneio'" },
+        "caps": { "left": "ARSTG", "right": "MNEIO\"" }
+      },
+      "bottom": {
+        "main": { "left": "xcdvz", "right": "kh,./" },
+        "caps": { "left": "XCDVZ", "right": "KH<>?" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     },
-    "top": {
-      "main": { "left": "qwfpb", "right": "jluy;[]\\" },
-      "caps": { "left": "QWFPB", "right": "JLUY:{}|" }
+    "iso": {
+      "bottom": {
+        "main": { "left": "zxcdv\\", "right": "kh,./" },
+        "caps": { "left": "ZXCDV|", "right": "KH<>?" }
+      }
     },
-    "mid": {
-      "main": { "left": "arstg", "right": "mneio'" },
-      "caps": { "left": "ARSTG", "right": "MNEIO\"" }
-    },
-    "bottom": {
-      "main": { "left": "zxcdv", "right": "kh,./" },
-      "caps": { "left": "ZXCDV", "right": "KH<>?" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "iso-wide": {
+      "number": {
+        "main": { "left": "`123456", "right": "=7890-" },
+        "caps": { "left": "~!@#$%^", "right": "+&*()_" }
+      },
+      "top": {
+        "main": { "left": "qwfpb[", "right": "jluy;[]\\" },
+        "caps": { "left": "QWFPB{", "right": "JLUY:{}|" }
+      },
+      "mid": {
+        "main": { "left": "arstg]", "right": "mneio'" },
+        "caps": { "left": "ARSTG}", "right": "MNEIO\"" }
+      },
+      "bottom": {
+        "main": { "left": "Zxcdv\\", "right": "#kh,./" },
+        "caps": { "left": "ZXCDV|", "right": "KH<>?" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   },
   "workman": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890-=" },
-      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
-    },
-    "top": {
-      "main": { "left": "qdrwb", "right": "jfup;[]\\" },
-      "caps": { "left": "QDRWB", "right": "JFUP:{}|" }
-    },
-    "mid": {
-      "main": { "left": "ashtg", "right": "yneoi'" },
-      "caps": { "left": "ASHTG", "right": "YNEOI\"" }
-    },
-    "bottom": {
-      "main": { "left": "zxmcv", "right": "kl,./" },
-      "caps": { "left": "ZXMCV", "right": "KL<>?" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890-=" },
+        "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+      },
+      "top": {
+        "main": { "left": "qdrwb", "right": "jfup;[]\\" },
+        "caps": { "left": "QDRWB", "right": "JFUP:{}|" }
+      },
+      "mid": {
+        "main": { "left": "ashtg", "right": "yneoi'" },
+        "caps": { "left": "ASHTG", "right": "YNEOI\"" }
+      },
+      "bottom": {
+        "main": { "left": "zxmcv", "right": "kl,./" },
+        "caps": { "left": "ZXMCV", "right": "KL<>?" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   },
   "dvorak": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890[]" },
-      "caps": { "left": "~!@#$%", "right": "^&*(){}" }
-    },
-    "top": {
-      "main": { "left": "',.py", "right": "fgcrl/=\\" },
-      "caps": { "left": "\"<>PY", "right": "FGCRL?+|" }
-    },
-    "mid": {
-      "main": { "left": "aoeui", "right": "dhtns-" },
-      "caps": { "left": "AOEUI", "right": "DHTNS_" }
-    },
-    "bottom": {
-      "main": { "left": ";qjkx", "right": "bmwvz" },
-      "caps": { "left": ":QJKX", "right": "BMWVZ" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890[]" },
+        "caps": { "left": "~!@#$%", "right": "^&*(){}" }
+      },
+      "top": {
+        "main": { "left": "',.py", "right": "fgcrl/=\\" },
+        "caps": { "left": "\"<>PY", "right": "FGCRL?+|" }
+      },
+      "mid": {
+        "main": { "left": "aoeui", "right": "dhtns-" },
+        "caps": { "left": "AOEUI", "right": "DHTNS_" }
+      },
+      "bottom": {
+        "main": { "left": ";qjkx", "right": "bmwvz" },
+        "caps": { "left": ":QJKX", "right": "BMWVZ" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   },
   "halmak": {
-    "number": {
-      "main": { "left": "`12345", "right": "67890-=" },
-      "caps": { "left": "~!@#$%", "right": "^&*()_+" }
-    },
-    "top": {
-      "main": { "left": "wlrbz", "right": ";qudj[]\\" },
-      "caps": { "left": "WLRBZ", "right": ":QUDJ{}|" }
-    },
-    "mid": {
-      "main": { "left": "shnt,", "right": ".aeoi'" },
-      "caps": { "left": "SHNT<", "right": ">AEOI\"" }
-    },
-    "bottom": {
-      "main": { "left": "fmvc/", "right": "gpxky" },
-      "caps": { "left": "FMVC?", "right": "GPXKY" }
-    },
-    "space": {
-      "main": { "left": " ", "right": " " },
-      "caps": { "left": " ", "right": " " }
+    "ansi": {
+      "number": {
+        "main": { "left": "`12345", "right": "67890-=" },
+        "caps": { "left": "~!@#$%", "right": "^&*()_+" }
+      },
+      "top": {
+        "main": { "left": "wlrbz", "right": ";qudj[]\\" },
+        "caps": { "left": "WLRBZ", "right": ":QUDJ{}|" }
+      },
+      "mid": {
+        "main": { "left": "shnt,", "right": ".aeoi'" },
+        "caps": { "left": "SHNT<", "right": ">AEOI\"" }
+      },
+      "bottom": {
+        "main": { "left": "fmvc/", "right": "gpxky" },
+        "caps": { "left": "FMVC?", "right": "GPXKY" }
+      },
+      "space": {
+        "main": { "left": " ", "right": " " },
+        "caps": { "left": " ", "right": " " }
+      }
     }
   }
 }
